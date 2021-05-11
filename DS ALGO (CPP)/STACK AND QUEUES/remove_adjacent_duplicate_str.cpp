@@ -14,7 +14,7 @@ string removeDuplicates(string S) {
             else if(t.top()==S[i])                     // top of stack equal recent array element pop it
                    t.pop();
             else 
-                t.push(S[i]);                              // otherwise push it
+                t.push(S[i]);                              
         }
         
         while(!t.empty()){                        //loop to store stack elements in a string in LIFO order 

@@ -34,7 +34,7 @@ treenode* buildBST(int* arr , int beginindex , int endindex){
 }
 
 void printtree(treenode* root){
-    queue<treenode*>pendingnodes;
+    queue<treenode*> pendingnodes;
     pendingnodes.push(root);
 
     while (!pendingnodes.empty())
@@ -43,7 +43,7 @@ void printtree(treenode* root){
         pendingnodes.pop();
         string tobeprinted = to_string(currentnode->data)+":";
 
-        if (root->left != NULL)
+        if (currentnode->left != NULL)
         {
             tobeprinted += "L:"+to_string(currentnode->left->data)+",";
             pendingnodes.push(currentnode->left);
@@ -53,7 +53,7 @@ void printtree(treenode* root){
             tobeprinted += "L:-1";
         }
         
-        if (root->right != NULL)
+        if (currentnode->right != NULL)
         {
             tobeprinted += "R:"+to_string(currentnode->right->data)+",";
             pendingnodes.push(currentnode->right);

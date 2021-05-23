@@ -17,7 +17,7 @@ string LCSrecursion(string s1 , string s2){
     else
     {
         string option1 = LCSrecursion(s1 , s2.substr(1));
-        string option2 = LCSrecursion(s1.substr(1) , s1);
+        string option2 = LCSrecursion(s1.substr(1) , s2);
         if (option1.length() > option2.length())
         {
             return option1;
@@ -41,9 +41,9 @@ string LCSdp(string s1 ,string s2){
     {
         arr[0][i] = "";
     }
-    for (int i = 0; i < m+1; i++)
+    for (int i = 1; i < m+1; i++)
     {
-        for (int j = 0; j < n+1; j++)
+        for (int j = 1; j < n+1; j++)
         {
             if (s1[m-i] == s2[n-j])
             {
@@ -61,6 +61,6 @@ string LCSdp(string s1 ,string s2){
 }
 
 int main(){
-    //cout<<LCSrecursion("abcdefghi","bghicfhi")<<endl;
+    cout<<LCSrecursion("abcdefghi","bghicfhi")<<endl;
     cout<<LCSdp("abcdefghi","bghicfhi")<<endl;
 }

@@ -1,6 +1,3 @@
-//-----------NOT COMPLLETED------------
-
-
 #include<iostream>
 using namespace std;
 

@@ -238,6 +238,18 @@ node* sortLinkedlist(node* head){
     return head;
 }
 
+node* swappairs(node* head){
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    
+    node* temp = head->next;
+    head->next = swappairs(temp->next);
+    temp->next = head;
+
+    return temp;
+}
 
 int main(){
     node* head = takeinput();
@@ -269,4 +281,6 @@ int main(){
     // head = sortLinkedlist(head);
     // print(head);
     // cout<<ispalindrome(head)<<endl;
+    head = swappairs(head);
+    print(head);
 }

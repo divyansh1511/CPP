@@ -140,6 +140,30 @@ node* reverseKelements(node* head , int k){
     return prev;
 }
 
+/////-------------AMAZON-----------
+
+node* solve(node* head){
+    
+    node* zd=new node(8);
+    node* od=new node(9);
+
+    node* crr=head,*z=zd,*o=od;
+    while(crr!=0){
+        if(crr->data==0){
+            z->next=crr;
+            z=z->next;
+        }
+        else if(crr->data==1){
+            o->next=crr;
+            o=o->next;
+        }
+        crr=crr->next;
+    }
+    z->next=od->next;
+    o->next=NULL;
+    return zd->next;
+}
+
 int nooftimes(node* head , int key){
     node* temp = head;
     int count = 0;
@@ -281,6 +305,9 @@ int main(){
     // head = sortLinkedlist(head);
     // print(head);
     // cout<<ispalindrome(head)<<endl;
-    head = swappairs(head);
+    // head = swappairs(head);
+    // print(head);
+
+    head = solve(head);
     print(head);
 }

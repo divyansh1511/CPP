@@ -60,9 +60,22 @@ node* reverse(node* head){
     return prev;
 }
 
+node* reverserecursiom(node* head){
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    node* revresehead = reverserecursiom(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return revresehead;
+}
+
 int main(){
     node* head = takeinput();
     print(head);
-    node* reve = reverse(head);
-    print(reve);
+    // node* reve = reverse(head);
+    // print(reve);
+    node* reve1 = reverserecursiom(head);
+    print(reve1);
 }

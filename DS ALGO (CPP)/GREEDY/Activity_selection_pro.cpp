@@ -27,7 +27,7 @@ int maxMeetings(int start[], int end[], int n)
         if (v[i].second < v[j].first)
         {
             c++;
-            i == j;
+            i = j;
             j++;
         }
         else

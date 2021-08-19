@@ -10,11 +10,11 @@ int goldmine(int arr[][4] , int n , int m){
     {
         for (int row = 0; row < n; row++)
         {
-            int right = (col == n-1) ? 0 : goldtable[row][col+1];
+            int right = (col == m-1) ? 0 : goldtable[row][col+1];
 
-            int right_up = (row == 0 || col == n-1) ? 0 : goldtable[row-1][col+1];
+            int right_up = (row == 0 || col == m-1) ? 0 : goldtable[row-1][col+1];
 
-            int right_down = (row == m-1 || col == n-1) ? 0 : goldtable[row+1][col+1];
+            int right_down = (row == m-1 || col == m-1) ? 0 : goldtable[row+1][col+1];
 
             goldtable[row][col] = arr[row][col] + max({right , right_down , right_up});
         }

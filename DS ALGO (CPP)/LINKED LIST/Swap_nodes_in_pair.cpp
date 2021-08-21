@@ -55,8 +55,34 @@ node* swapnodes(node* head){
     return output;
 }
 
+node* swap(node* prev, node* curr)
+{
+    prev->next = curr->next;
+    curr->next = prev;
+    return curr;
+}
+
+node* pairsSwap(node* head)
+{
+    //  Make a dummy node.
+    node* dummy = new node(-1);
+
+    dummy->next = head;
+
+    node* curr = dummy;
+
+    while (curr->next != NULL && curr->next->next != NULL)
+    {
+        curr->next = swap(curr->next, curr->next->next);
+        curr = curr->next->next;
+    }
+
+    return dummy->next;
+}
+
 int main(){
     node* head = takeinput();
-    swapnodes(head);
+    head = swapnodes(head);
+    // head = pairsSwap(head);
     print(head);
 }

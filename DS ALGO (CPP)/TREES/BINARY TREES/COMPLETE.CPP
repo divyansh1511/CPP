@@ -1,5 +1,7 @@
 #include <iostream>
 #include <queue>
+#include<map>
+#include<bits/stdc++.h>
 #include <stack>
 using namespace std;
 
@@ -239,6 +241,27 @@ void inordered(treenode *root)
     inordered(root->right);
 }
 
+void inorderiteratie(treenode* root){
+    stack<treenode*> st;
+    treenode* curr = root;
+
+    while (!st.empty() || curr != NULL)
+    {
+        if (curr != NULL)
+        {
+            st.push(curr);
+            curr = curr->left;
+        }
+        else
+        {
+            curr = st.top();
+            st.pop();
+            cout<<curr->data<<endl;
+            curr = curr->right;
+        }
+    }
+}
+
 void preorder(treenode *root)
 {
     if (root == NULL)
@@ -324,6 +347,71 @@ void rightview(treenode *root)
             }
         }
     }
+}
+
+void topview(treenode* root){
+    map<int , int> m;
+    queue<pair<treenode* , int>> q;
+    if (root == NULL)
+    {
+        return;
+    }
+    q.push({root , 0});
+
+    while (!q.empty())
+    {
+        treenode* temp = q.front().first;
+        int h = q.front().second;
+        q.pop();
+        if (m[h] == 0)
+        {
+            m[h] = temp->data;
+        }
+        if (temp->left != NULL)
+        {
+            q.push({temp->left , h-1});
+        }
+        if (temp->right != NULL)
+        {
+            q.push({temp->right , h+1});
+        }
+    }
+    for (auto x : m)
+    {
+        cout<<x.second<<endl;
+    }
+    
+}
+
+void bottomview(treenode* root){
+    map<int , int> m;
+    queue<pair<treenode* , int>> q;
+    if (root == NULL)
+    {
+        return;
+    }
+    q.push({root , 0});
+
+    while (!q.empty())
+    {
+        treenode* temp = q.front().first;
+        int h = q.front().second;
+        q.pop();
+        m[h] = temp->data;
+        if (temp->left != NULL)
+        {
+            q.push({temp->left , h-1});
+        }
+        if (temp->right != NULL)
+        {
+            q.push({temp->right , h+1});
+        }
+    }
+    for (auto x : m)
+    {
+        cout<<x.second<<endl;
+    }
+    
 }
 
 bool isBalanced(treenode *root)

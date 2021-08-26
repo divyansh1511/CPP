@@ -464,6 +464,36 @@ bool issumtree(treenode *root)
     return false;
 }
 
+void sumreplace(treenode* root){
+    if (root == NULL)
+    {
+        return;
+    }
+    sumreplace(root->left);
+    sumreplace(root->right);
+
+    if (root->left != NULL)
+    {
+        root->data += root->left->data;
+    }
+    if (root->right != NULL)
+    {
+        root->data += root->right->data;
+    }
+}
+
+int sumreplace0(treenode* root){
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int oldval = root->data;
+
+    root->data = sumreplace0(root->left)+sumreplace0(root->right);
+
+    return root->data + oldval;
+}
+
 int leafnode(treenode *root)
 {
     if (root == NULL)
@@ -635,5 +665,7 @@ int main()
     // printlevelwise(root);
     // cout<<largestsubtreesum(root)<<endl;
     // cout<<isIsomorphoic(root1 , root2)<<endl;
-    cout<<finddistance(root1 , 2 , 7)<<endl;
+    sumreplace0(root1);
+    printlevelwise(root1);
+    // cout<<finddistance(root1 , 2 , 7)<<endl;
 }

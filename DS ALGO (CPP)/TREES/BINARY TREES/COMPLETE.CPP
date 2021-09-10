@@ -636,6 +636,31 @@ int finddistance(treenode* root ,int n1 , int n2){
     return d1+d2;
 }
 
+vector<int> digonaltraversal(treenode* root){
+    queue<treenode*> q;
+    vector<int> ans;
+    if (root == NULL)
+    {
+        return ans;
+    }
+    q.push(root);
+    while (!q.empty())
+    {
+        treenode* temp = q.front();
+        q.pop();
+        while (temp != NULL)
+        {
+            if (temp->left != NULL)
+            {
+                q.push(temp->left);
+            }
+            ans.push_back(temp->data);
+            temp = temp->right;
+        }
+    }
+    return ans;
+}
+
 int main()
 {
     treenode* root1 = takeinput();
@@ -665,7 +690,13 @@ int main()
     // printlevelwise(root);
     // cout<<largestsubtreesum(root)<<endl;
     // cout<<isIsomorphoic(root1 , root2)<<endl;
-    sumreplace0(root1);
-    printlevelwise(root1);
+    // sumreplace0(root1);
+    // printlevelwise(root1);
     // cout<<finddistance(root1 , 2 , 7)<<endl;
+    vector<int> a;
+    a = digonaltraversal(root1);
+    for (int i = 0; i < a.size(); i++)
+    {
+        cout<<a[i]<<endl;
+    }
 }

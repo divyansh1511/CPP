@@ -1,7 +1,7 @@
 #include <iostream>
 #include <queue>
-#include<map>
-#include<bits/stdc++.h>
+#include <map>
+#include <bits/stdc++.h>
 #include <stack>
 using namespace std;
 
@@ -241,9 +241,10 @@ void inordered(treenode *root)
     inordered(root->right);
 }
 
-void inorderiteratie(treenode* root){
-    stack<treenode*> st;
-    treenode* curr = root;
+void inorderiteratie(treenode *root)
+{
+    stack<treenode *> st;
+    treenode *curr = root;
 
     while (!st.empty() || curr != NULL)
     {
@@ -256,7 +257,7 @@ void inorderiteratie(treenode* root){
         {
             curr = st.top();
             st.pop();
-            cout<<curr->data<<endl;
+            cout << curr->data << endl;
             curr = curr->right;
         }
     }
@@ -349,18 +350,19 @@ void rightview(treenode *root)
     }
 }
 
-void topview(treenode* root){
-    map<int , int> m;
-    queue<pair<treenode* , int>> q;
+void topview(treenode *root)
+{
+    map<int, int> m;
+    queue<pair<treenode *, int>> q;
     if (root == NULL)
     {
         return;
     }
-    q.push({root , 0});
+    q.push({root, 0});
 
     while (!q.empty())
     {
-        treenode* temp = q.front().first;
+        treenode *temp = q.front().first;
         int h = q.front().second;
         q.pop();
         if (m[h] == 0)
@@ -369,49 +371,48 @@ void topview(treenode* root){
         }
         if (temp->left != NULL)
         {
-            q.push({temp->left , h-1});
+            q.push({temp->left, h - 1});
         }
         if (temp->right != NULL)
         {
-            q.push({temp->right , h+1});
+            q.push({temp->right, h + 1});
         }
     }
     for (auto x : m)
     {
-        cout<<x.second<<endl;
+        cout << x.second << endl;
     }
-    
 }
 
-void bottomview(treenode* root){
-    map<int , int> m;
-    queue<pair<treenode* , int>> q;
+void bottomview(treenode *root)
+{
+    map<int, int> m;
+    queue<pair<treenode *, int>> q;
     if (root == NULL)
     {
         return;
     }
-    q.push({root , 0});
+    q.push({root, 0});
 
     while (!q.empty())
     {
-        treenode* temp = q.front().first;
+        treenode *temp = q.front().first;
         int h = q.front().second;
         q.pop();
         m[h] = temp->data;
         if (temp->left != NULL)
         {
-            q.push({temp->left , h-1});
+            q.push({temp->left, h - 1});
         }
         if (temp->right != NULL)
         {
-            q.push({temp->right , h+1});
+            q.push({temp->right, h + 1});
         }
     }
     for (auto x : m)
     {
-        cout<<x.second<<endl;
+        cout << x.second << endl;
     }
-    
 }
 
 bool isBalanced(treenode *root)
@@ -464,7 +465,8 @@ bool issumtree(treenode *root)
     return false;
 }
 
-void sumreplace(treenode* root){
+void sumreplace(treenode *root)
+{
     if (root == NULL)
     {
         return;
@@ -482,14 +484,15 @@ void sumreplace(treenode* root){
     }
 }
 
-int sumreplace0(treenode* root){
+int sumreplace0(treenode *root)
+{
     if (root == NULL)
     {
         return 0;
     }
     int oldval = root->data;
 
-    root->data = sumreplace0(root->left)+sumreplace0(root->right);
+    root->data = sumreplace0(root->left) + sumreplace0(root->right);
 
     return root->data + oldval;
 }
@@ -558,17 +561,19 @@ treenode *buildtree(int pre[], int in[], int instart, int inend)
     return root;
 }
 
-int largestsubtreesum(treenode* root){
+int largestsubtreesum(treenode *root)
+{
     if (root == NULL)
     {
         return 0;
     }
     int lefttree = largestsubtreesum(root->left);
     int righttree = largestsubtreesum(root->right);
-    return root->data+lefttree+righttree;
+    return root->data + lefttree + righttree;
 }
 
-bool isIsomorphoic(treenode* root1 , treenode* root2){
+bool isIsomorphoic(treenode *root1, treenode *root2)
+{
     if (root1 == NULL && root2 == NULL)
     {
         return true;
@@ -581,10 +586,11 @@ bool isIsomorphoic(treenode* root1 , treenode* root2){
     {
         return false;
     }
-    return (isIsomorphoic(root1->left , root2->left) && isIsomorphoic(root1->right , root2->right)) || (isIsomorphoic(root1->left , root2->right) && isIsomorphoic(root1->right , root2->left));
+    return (isIsomorphoic(root1->left, root2->left) && isIsomorphoic(root1->right, root2->right)) || (isIsomorphoic(root1->left, root2->right) && isIsomorphoic(root1->right, root2->left));
 }
 
-treenode* LCA(treenode* root , int n1 , int n2){
+treenode *LCA(treenode *root, int n1, int n2)
+{
     if (root == NULL)
     {
         return root;
@@ -593,9 +599,9 @@ treenode* LCA(treenode* root , int n1 , int n2){
     {
         return root;
     }
-    
-    treenode* left = LCA(root->left , n1 ,n2);
-    treenode* right = LCA(root->right , n1 , n2);
+
+    treenode *left = LCA(root->left, n1, n2);
+    treenode *right = LCA(root->right, n1, n2);
     if (left != NULL && right != NULL)
     {
         return root;
@@ -606,12 +612,13 @@ treenode* LCA(treenode* root , int n1 , int n2){
     }
     if (left != NULL)
     {
-        return LCA(root->left , n1 ,n2);
+        return LCA(root->left, n1, n2);
     }
-    return LCA(root->right , n1 ,n2);
+    return LCA(root->right, n1, n2);
 }
 
-int findlevel(treenode* root , int k , int level){
+int findlevel(treenode *root, int k, int level)
+{
     if (root == NULL)
     {
         return -1;
@@ -620,24 +627,26 @@ int findlevel(treenode* root , int k , int level){
     {
         return level;
     }
-    int left = findlevel(root->left , k , level+1);
+    int left = findlevel(root->left, k, level + 1);
     if (left == -1)
     {
-        return findlevel(root->right , k , level+1);
+        return findlevel(root->right, k, level + 1);
     }
     return left;
 }
 
-int finddistance(treenode* root ,int n1 , int n2){
-    treenode* lca = LCA(root , n1 ,n2);
+int finddistance(treenode *root, int n1, int n2)
+{
+    treenode *lca = LCA(root, n1, n2);
 
-    int d1 = findlevel(lca , n1 , 0);
-    int d2 = findlevel(lca , n2 , 0);
-    return d1+d2;
+    int d1 = findlevel(lca, n1, 0);
+    int d2 = findlevel(lca, n2, 0);
+    return d1 + d2;
 }
 
-vector<int> digonaltraversal(treenode* root){
-    queue<treenode*> q;
+vector<int> digonaltraversal(treenode *root)
+{
+    queue<treenode *> q;
     vector<int> ans;
     if (root == NULL)
     {
@@ -646,7 +655,7 @@ vector<int> digonaltraversal(treenode* root){
     q.push(root);
     while (!q.empty())
     {
-        treenode* temp = q.front();
+        treenode *temp = q.front();
         q.pop();
         while (temp != NULL)
         {
@@ -661,9 +670,36 @@ vector<int> digonaltraversal(treenode* root){
     return ans;
 }
 
+void nodesatk(treenode *root, int k, vector<int> &v)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (k == 0)
+    {
+        v.push_back(root->data);
+    }
+    nodesatk(root->left, k - 1, v);
+    nodesatk(root->right, k - 1, v);
+}
+vector<vector<int>> levelOrderBottom(treenode *root)
+{
+    vector<vector<int>> ans;
+    int n = height(root);
+    for (int i = n - 1; i >= 0; i--)
+    {
+        vector<int> v;
+        nodesatk(root, i, v);
+        ans.push_back(v);
+        v.clear();
+    }
+    return ans;
+}
+
 int main()
 {
-    treenode* root1 = takeinput();
+    // treenode *root1 = takeinput();
     // treenode* root2 = takeinput();
     //printlevelwise(root);
     // printrecursion(root);
@@ -693,10 +729,22 @@ int main()
     // sumreplace0(root1);
     // printlevelwise(root1);
     // cout<<finddistance(root1 , 2 , 7)<<endl;
-    vector<int> a;
-    a = digonaltraversal(root1);
-    for (int i = 0; i < a.size(); i++)
+    // vector<int> a;
+    // a = digonaltraversal(root1);
+    // for (int i = 0; i < a.size(); i++)
+    // {
+    //     cout << a[i] << endl;
+    // }
+    treenode* root = takeinput();
+    vector<vector<int>> v;
+    v = levelOrderBottom(root);
+    for (int i = 0; i < v.size(); i++)
     {
-        cout<<a[i]<<endl;
+        for (int j = 0; j < v[i].size(); j++)
+        {
+            cout<<v[i][j]<<" ";
+        }
+        cout<<endl;
     }
+    
 }

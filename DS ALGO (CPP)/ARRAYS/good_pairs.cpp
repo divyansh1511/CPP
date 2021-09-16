@@ -6,6 +6,7 @@
 
 #include<iostream>
 #include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 int numIdenticalPairs(vector<int>& nums) {
@@ -20,6 +21,16 @@ int numIdenticalPairs(vector<int>& nums) {
     return count;
 }
 
+void solve(vector<int>& nums){
+    int count = 0;
+    unordered_map<int , int> mp;
+    for (int i : nums)
+    {
+        count += mp[i]++;
+    }
+    cout<<count<<endl;
+}
+
 int main(){
     vector<int> arr;
     int n;
@@ -31,4 +42,5 @@ int main(){
         arr.push_back(x);
     }
     cout<<numIdenticalPairs(arr)<<endl;
+    solve(arr);
 }

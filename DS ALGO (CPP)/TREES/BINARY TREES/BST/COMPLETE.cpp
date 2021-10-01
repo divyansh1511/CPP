@@ -79,7 +79,13 @@ bool findnode(treenode* root , int k){
     {
         return true;
     }
-    return findnode(root->left , k) || findnode(root->right , k);
+    if(root->data < k){
+        return findnode(root->right , k);
+    }
+    else
+    {
+        return findnode(root->left , k);
+    }
 }
 
 treenode* minnode(treenode* root){

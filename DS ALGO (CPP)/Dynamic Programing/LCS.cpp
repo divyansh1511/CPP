@@ -1,3 +1,4 @@
+// substring code
 #include<iostream>
 using namespace std;
 

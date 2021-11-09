@@ -554,7 +554,7 @@ treenode *buildtree(int pre[], int in[], int instart, int inend)
         return root;
     }
 
-    int index = search(in, instart, inend, root->data);
+    int index = (instart + inend)/2;        //----------or search function
     root->left = buildtree(pre, in, instart, index - 1);
     root->right = buildtree(pre, in, index + 1, inend);
 
@@ -720,10 +720,10 @@ int main()
     // cout<<isBalanced(root)<<endl;
     // cout<<checkmirror(root1 , root2)<<endl;
     //cout<<samelevel(root1)<<endl;
-    // int in[] = {4,2,5,1,6,3,7};
-    // int pre[] = {1,2,4,5,3,6,7};
-    // treenode* root = buildtree(pre , in , 0 , 6);
-    // printlevelwise(root);
+    int in[] = {4,2,5,1,6,3,7};
+    int pre[] = {1,2,4,5,3,6,7};
+    treenode* root = buildtree(pre , in , 0 , 6);
+    printlevelwise(root);
     // cout<<largestsubtreesum(root)<<endl;
     // cout<<isIsomorphoic(root1 , root2)<<endl;
     // sumreplace0(root1);
@@ -735,16 +735,16 @@ int main()
     // {
     //     cout << a[i] << endl;
     // }
-    treenode* root = takeinput();
-    vector<vector<int>> v;
-    v = levelOrderBottom(root);
-    for (int i = 0; i < v.size(); i++)
-    {
-        for (int j = 0; j < v[i].size(); j++)
-        {
-            cout<<v[i][j]<<" ";
-        }
-        cout<<endl;
-    }
+    // treenode* root = takeinput();
+    // vector<vector<int>> v;
+    // v = levelOrderBottom(root);
+    // for (int i = 0; i < v.size(); i++)
+    // {
+    //     for (int j = 0; j < v[i].size(); j++)
+    //     {
+    //         cout<<v[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
     
 }

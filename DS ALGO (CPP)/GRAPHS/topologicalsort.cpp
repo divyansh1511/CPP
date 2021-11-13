@@ -6,7 +6,6 @@ class Solution{
         vis[node] = 1; 
         
         for(auto it : adj[node]) {
-            cout<<it<<endl;
             if(!vis[it]) {
                 findTopoSort(it, vis, st, adj); 
             }

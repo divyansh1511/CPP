@@ -1,44 +1,62 @@
-#include<iostream>
-#include<queue>
-#include<vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int n,e;
-    cin>>n>>e;
-    int count = 0;
-    vector<vector<int>> adj(n);
-    vector<int> indeg(n,0);
-    for (int i = 0; i < e; i++)
-    {
-        int first,second;
-        cin>>first>>second;
-        adj[first].push_back(second);
-        indeg[second]++;
-    }
-    
-    queue<int> pq;
-    for (int i = 0; i < n; i++)
-    {
-        if (indeg[i] == 0)
-        {
-            pq.push(i);
-        }
-    }
-    
-    while (!pq.empty())
-    {
-        count++;
-        int x = pq.front();
-        pq.pop();
-        cout<<x<<" ";
-        for (auto it : adj[x])
-        {
-            indeg[it]--;
-            if (indeg[it] == 0)
-            {
-                pq.push(it);
+class Solution{
+    void findTopoSort(int node, vector<int> &vis, stack<int> &st, vector<int> adj[]) {
+        vis[node] = 1; 
+        
+        for(auto it : adj[node]) {
+            cout<<it<<endl;
+            if(!vis[it]) {
+                findTopoSort(it, vis, st, adj); 
             }
         }
+        st.push(node); 
     }
-}
+	public:
+	vector<int> topoSort(int N, vector<int> adj[]) {
+	    stack<int> st; 
+	    vector<int> vis(N, 0); 
+	    for(int i = 0;i<N;i++) {
+	        if(vis[i] == 0) {
+	            findTopoSort(i, vis, st, adj); 
+	        }
+	    }
+	    vector<int> topo;
+	    while(!st.empty()) {
+	        topo.push_back(st.top()); 
+	        st.pop(); 
+	    }
+	    return topo; 
+	    
+	}
+};
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int N, E;
+        cin >> E >> N;
+        int u, v;
+
+        vector<int> adj[N];
+
+        for (int i = 0; i < E; i++) {
+            cin >> u >> v;
+            adj[u].push_back(v);
+        }
+        
+        Solution obj;
+        vector <int> res = obj.topoSort(N, adj);
+
+        for (int i = 0; i < res.size(); i++)
+        {
+            cout<<res[i]<<" ";
+        }
+        
+        // cout << check(N, res, adj) << endl;
+    }
+    
+    return 0;
+}  // } Driver Code Ends

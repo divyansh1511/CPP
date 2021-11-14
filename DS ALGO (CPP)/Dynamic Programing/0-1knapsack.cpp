@@ -2,64 +2,76 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int knapsacrec(int wt[] , int val[] , int W , int n){
-    if(n == 0 || W == 0){
+int knapsack(int wt[] , int prices[] , int W , int n){
+    if (n == 0 || W == 0)
+    {
         return 0;
     }
     if (wt[n-1] <= W)
     {
-        return max(val[n-1] + knapsacrec(wt , val , W-wt[n-1] , n-1) , knapsacrec(wt , val , W , n-1));
+        return max(prices[n-1] +knapsack(wt , prices , W - wt[n-1] , n-1) , knapsack(wt , prices , W , n-1));
     }
-    else if (wt[n-1] > W)
+    else
     {
-        return knapsacrec(wt , val , W , n-1);
+        return knapsack(wt , prices , W , n-1);
     }
 }
 
-int knapsacmem(int wt[] , int val[] , int W , int n){
-    static int t[1002][1002];
-    memset(t , -1 , sizeof(t));
-    if(n == 0 || W == 0){
+int knapsackmem(int wt[] , int prices[] , int W , int n){
+    int static dp[1002][1002];
+    memset(dp , -1 , sizeof(dp));
+    if (n == 0 || W == 0)
+    {
         return 0;
     }
-    if (t[n][W] != -1)
+    if (dp[n][W] != -1)
     {
-        return t[n][W];
+        return dp[n][W];
     }
+    
     if (wt[n-1] <= W)
     {
-        return t[n][W] = max(val[n-1] + knapsacmem(wt , val , W-wt[n-1] , n-1) , knapsacmem(wt , val , W , n-1));
+        return dp[n][W] = max(prices[n-1] + knapsackmem(wt , prices , W-wt[n-1] , n-1) , knapsackmem(wt , prices , W , n-1));
     }
-    else if (wt[n-1] > W)
+    else
     {
-        return knapsacmem(wt , val ,W , n-1);
+        return dp[n][W] = knapsackmem(wt , prices , W , n-1);
     }
 }
 
-int knapsactab(int wt[] , int val[] , int W , int n){
+int knapsackdp(int wt[] , int prices[] , int W , int n){
     int dp[n+1][W+1];
-    for(int i = 0; i <= n; i++)
+    for (int i = 0; i <= n; i++)
     {
-        for(int w = 0; w <= W; w++)
+        for (int j = 0; j <= W; j++)
         {
-            if (i == 0 || w == 0)
-                dp[i][w] = 0;
-            else if (wt[i - 1] <= w)
-                dp[i][w] = max(val[i - 1] +
-                                dp[i - 1][w - wt[i - 1]],
-                                dp[i - 1][w]);
+            if (i == 0 || j == 0)
+            {
+                dp[i][j] = 0;
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= W; j++)
+        {
+            if (wt[i-1] <= j)
+            {
+                dp[i][j] = max(prices[i-1] + dp[i-1][j-wt[i-1]] , dp[i-1][j]);
+            }
             else
-                dp[i][w] = dp[i - 1][w];
+            {
+                dp[i][j] = dp[i-1][j];
+            }
         }
     }
     return dp[n][W];
 }
 
 int main(){
-    int wt[] = {10,20,30};
-    int val[] = {60,100,120};
-    int W = 50;
-    cout<<knapsacrec(wt , val , W , 3)<<endl;
-    cout<<knapsacmem(wt , val , W , 3)<<endl;
-    cout<<knapsactab(wt , val , W , 3)<<endl;
+    int wt[] = {1,3,4,5};
+    int prices[] = {1,4,5,7};
+    cout<<knapsack(wt , prices , 7 , 4)<<endl;
+    cout<<knapsackmem(wt , prices , 7 , 4)<<endl;
+    cout<<knapsackdp(wt , prices , 7 , 4)<<endl;
 }

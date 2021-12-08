@@ -229,6 +229,31 @@ treenode* convertbinarytoBST(treenode* root){
     binarytoBST(v , 0 , v.size() - 1);
 }
 
+treenode* deletenode(treenode* root , int key){
+    if(root == NULL){
+        return NULL;
+    }
+    if(root->data == key){
+        if(root->right == NULL){
+            treenode* temp = root->left;
+            delete root;
+            return temp;
+        }
+        else
+        {
+            treenode* temp = root->right;
+            while (temp->left != NULL)
+            {
+                temp = temp->left;
+            }
+            swap(root->data , temp->data);
+        }
+    }
+    root->left = deletenode(root->left , key);
+    root->right = deletenode(root->right , key);
+    return root;
+}
+
 int main(){
     treenode* root = takeinput();
     // cout<<isBST(root , INT_MIN , INT_MAX)<<endl;

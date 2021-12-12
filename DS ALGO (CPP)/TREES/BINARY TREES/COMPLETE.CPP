@@ -417,7 +417,7 @@ void bottomview(treenode *root)
 
 //----Vertical traverse 987 leetcode-------------
 
-void traverse(treenode* root , int x , int y , map<int  , map<int , set<int>>> &mp){
+void traverse(treenode* root , int x , int y , map<int  , map<int , multiset<int>>> &mp){
     if (root)
     {
         mp[x][y].insert(root->data);
@@ -427,7 +427,7 @@ void traverse(treenode* root , int x , int y , map<int  , map<int , set<int>>> &
 }
 
 vector<vector<int>> verticaltraversal(treenode* root){
-    map<int , map<int , set<int>>> mp;
+    map<int , map<int , multiset<int>>> mp;
     traverse(root , 0 , 0 , mp);
     vector<vector<int>> ans;
     for(auto p : mp){

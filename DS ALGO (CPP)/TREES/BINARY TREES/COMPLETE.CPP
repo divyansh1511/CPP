@@ -415,6 +415,31 @@ void bottomview(treenode *root)
     }
 }
 
+//----Vertical traverse 987 leetcode-------------
+
+void traverse(treenode* root , int x , int y , map<int  , map<int , set<int>>> &mp){
+    if (root)
+    {
+        mp[x][y].insert(root->data);
+        traverse(root->left , x-1 , y+1 , mp);
+        traverse(root->right , x+1 , y+1 , mp);
+    }
+}
+
+vector<vector<int>> verticaltraversal(treenode* root){
+    map<int , map<int , set<int>>> mp;
+    traverse(root , 0 , 0 , mp);
+    vector<vector<int>> ans;
+    for(auto p : mp){
+        vector<int> col;
+        for(auto it : p.second){
+            col.insert(col.end() , it.second.begin() , it.second.end());
+        }
+        ans.push_back(col);
+    }
+    return ans;
+}
+//-----------------------------
 bool isBalanced(treenode *root)
 {
     if (root == NULL)
@@ -699,7 +724,7 @@ vector<vector<int>> levelOrderBottom(treenode *root)
 
 int main()
 {
-    // treenode *root1 = takeinput();
+    treenode *root = takeinput();
     // treenode* root2 = takeinput();
     //printlevelwise(root);
     // printrecursion(root);
@@ -720,10 +745,10 @@ int main()
     // cout<<isBalanced(root)<<endl;
     // cout<<checkmirror(root1 , root2)<<endl;
     //cout<<samelevel(root1)<<endl;
-    int in[] = {4,2,5,1,6,3,7};
-    int pre[] = {1,2,4,5,3,6,7};
-    treenode* root = buildtree(pre , in , 0 , 6);
-    printlevelwise(root);
+    // int in[] = {4,2,5,1,6,3,7};
+    // int pre[] = {1,2,4,5,3,6,7};
+    // treenode* root = buildtree(pre , in , 0 , 6);
+    // printlevelwise(root);
     // cout<<largestsubtreesum(root)<<endl;
     // cout<<isIsomorphoic(root1 , root2)<<endl;
     // sumreplace0(root1);
@@ -746,5 +771,14 @@ int main()
     //     }
     //     cout<<endl;
     // }
+    vector<vector<int>> ans = verticaltraversal(root);
+    for (int i = 0; i < ans.size(); i++)
+    {
+        for (int j = 0; j < ans[i].size(); j++)
+        {
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<endl;
+    }
     
 }

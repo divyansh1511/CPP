@@ -120,15 +120,22 @@ string LCSdp(string a , string b , int n , int m){
     return dp[n][m];
 }
 
-//---------------------------
+//--------------------------- LONGEST PALINDROME SEQUENCE ----------------//
+
+int LPS(string a , int n){
+    string b = a;
+    reverse(b.begin() , b.end());
+    return lcsdp(a , b  , n , n);
+}
 
 int main(){
     // cout<<lcsrec("hello" , "werld" , 5 ,5)<<endl;
     // cout<<lcsmem("hello" , "werld" , 5 , 5)<<endl;
     // cout<<lcsdp("hello" , "werld" , 5 , 5)<<endl;
-    string a = LCSrec("abcdefghi","bghicfhi" , 9 , 8);
-    reverse(a.begin() , a.end());
-    cout<<a<<endl;
-    string b = LCSdp("abcdefghi","bghicfhi" , 9 , 8);
-    cout<<b<<endl;
+    // string a = LCSrec("abcdefghi","bghicfhi" , 9 , 8);
+    // reverse(a.begin() , a.end());
+    // cout<<a<<endl;
+    // string b = LCSdp("abcdefghi","bghicfhi" , 9 , 8);
+    // cout<<b<<endl;
+    cout<<LPS("agbcba" , 6)<<endl;
 }

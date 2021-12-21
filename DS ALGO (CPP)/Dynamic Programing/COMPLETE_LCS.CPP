@@ -128,6 +128,12 @@ int LPS(string a , int n){
     return lcsdp(a , b  , n , n);
 }
 
+//----------------------  MINIMUM NO OF DELETION TO MAKE STRING PALINDROME -----------------------//
+
+int minidel(string a , int n){
+    return n - LPS(a , n);
+}
+
 int main(){
     // cout<<lcsrec("hello" , "werld" , 5 ,5)<<endl;
     // cout<<lcsmem("hello" , "werld" , 5 , 5)<<endl;
@@ -138,4 +144,5 @@ int main(){
     // string b = LCSdp("abcdefghi","bghicfhi" , 9 , 8);
     // cout<<b<<endl;
     cout<<LPS("agbcba" , 6)<<endl;
+    cout<<minidel("agbcba" , 6)<<endl;
 }

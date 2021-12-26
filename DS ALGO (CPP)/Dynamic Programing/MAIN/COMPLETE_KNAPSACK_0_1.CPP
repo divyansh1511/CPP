@@ -51,7 +51,7 @@ int knapsackdp(int wt[] , int val[] , int W , int n){
         {
             if (i == 0 || j == 0)
             {
-                dp[i][j] == 0;
+                dp[i][j] = 0;
             }
         }
     }

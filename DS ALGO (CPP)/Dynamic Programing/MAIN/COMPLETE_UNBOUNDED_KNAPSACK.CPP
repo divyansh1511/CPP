@@ -31,11 +31,11 @@ int knapsackmem(int wt[] , int val[] , int W , int n){
     }
     if (wt[n-1] <= W)
     {
-        return max(val[n-1] + knapsackmem(wt , val , W - wt[n-1] , n) , knapsackmem(wt , val , W , n-1));
+        return dp[n][W] = max(val[n-1] + knapsackmem(wt , val , W - wt[n-1] , n) , knapsackmem(wt , val , W , n-1));
     }
     else
     {
-        return knapsackmem(wt , val , W , n-1);
+        return dp[n][W] = knapsackmem(wt , val , W , n-1);
     }
 }
 

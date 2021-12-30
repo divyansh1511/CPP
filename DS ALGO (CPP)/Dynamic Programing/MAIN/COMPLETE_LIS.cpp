@@ -68,6 +68,26 @@ int list3(int arr[] , int n){
     return *max_element(lis , lis+n);
 }
 
+//-------------------------MAX CHAIN LENGTH------------------------------------//
+
+int maxchainlength(vector<pair<int , int>> v, int n){
+    vector<int> mcl(n);
+
+    for (int i = 0; i < n; i++ ) {
+        mcl[i] = 1; 
+    }
+
+    for (int i = 1; i < n; i++ ){
+        for (int j = 0; j < i; j++){ 
+            if ( v[i].first > v[j].second && mcl[i] < mcl[j] + 1){ 
+                mcl[i] = mcl[j] + 1; 
+            }
+        }
+    }
+
+    return *max_element(mcl.begin() , mcl.end());
+}
+
 int main(){
     int arr[] = {3, 100, 4, 5, 150, 6};
     int n = sizeof(arr) / sizeof(arr[0]);

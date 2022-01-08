@@ -275,6 +275,28 @@ void preorder(treenode *root)
     preorder(root->right);
 }
 
+void preorderitr(treenode* root){
+    stack<treenode*> st;
+    treenode* currnode = root;
+    while (!st.empty() || currnode != NULL)
+    {
+        while (currnode != NULL)
+        {
+            cout<<currnode->data<<" ";
+            if (currnode->right != NULL)
+            {
+                st.push(currnode->right);
+            }
+            currnode = currnode->left;
+        }
+        if (!st.empty())
+        {
+            currnode = st.top();
+            st.pop();
+        }
+    }
+}
+
 void postorder(treenode *root)
 {
     if (root == NULL)

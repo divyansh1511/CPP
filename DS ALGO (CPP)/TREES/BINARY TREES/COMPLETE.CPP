@@ -746,9 +746,36 @@ vector<vector<int>> levelOrderBottom(treenode *root)
     return ans;
 }
 
+vector<treenode*> allpossiblefullbt(int n){
+    vector<treenode*> res;
+    if (n%2 == 0)
+    {
+        return res;
+    }
+    if (n == 1)
+    {
+        res.push_back(new treenode(0));
+        return res;
+    }
+    for (int i = 1; i < n-1; i += 2)
+    {
+        vector<treenode*> leftt = allpossiblefullbt(i);
+        vector<treenode*> rightt = allpossiblefullbt(n-i-1);
+        for(auto l : leftt){
+            for(auto r : rightt){
+                treenode* root = new treenode(0);
+                root->left = l;
+                root->right = r;
+                res.push_back(root);
+            }
+        }
+    }
+    return res;
+}
+
 int main()
 {
-    treenode *root = takeinput();
+    // treenode *root = takeinput();
     // treenode* root2 = takeinput();
     //printlevelwise(root);
     // printrecursion(root);
@@ -795,13 +822,19 @@ int main()
     //     }
     //     cout<<endl;
     // }
-    vector<vector<int>> ans = verticaltraversal(root);
-    for (int i = 0; i < ans.size(); i++)
+    // vector<vector<int>> ans = verticaltraversal(root);
+    // for (int i = 0; i < ans.size(); i++)
+    // {
+    //     for (int j = 0; j < ans[i].size(); j++)
+    //     {
+    //         cout<<ans[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+    vector<treenode*> v = allpossiblefullbt(7);
+    for (int i = 0; i < v.size(); i++)
     {
-        for (int j = 0; j < ans[i].size(); j++)
-        {
-            cout<<ans[i][j]<<" ";
-        }
+        printlevelwise(v[i]);
         cout<<endl;
     }
     

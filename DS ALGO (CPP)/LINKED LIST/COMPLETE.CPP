@@ -275,6 +275,24 @@ node* swappairs(node* head){
     return temp;
 }
 
+node* removefromEnd(node* head , int n){
+    node* t1 = head;
+    node* t2 = head;
+    for (int i = 0; i < n; i++)
+    {
+        t1 = t1->next;
+    }
+    node* prev = NULL;
+    while (t1 != NULL)
+    {
+        t1 = t1->next;
+        prev = t2;
+        t2 = t2->next;
+    }
+    prev->next = t2->next;
+    return head;
+}
+
 int main(){
     node* head = takeinput();
     // head = Insertele(head , 100 , 0);
@@ -308,6 +326,8 @@ int main(){
     // head = swappairs(head);
     // print(head);
 
-    head = solve(head);
+    // head = solve(head);
+    // print(head);
+    head = removefromEnd(head , 2);
     print(head);
 }

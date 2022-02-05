@@ -10,6 +10,24 @@ void rotate(int arr[] , int n){
     arr[0] = temp;
 }
 
+//-------opti-----
+
+void helper(int arr[] , int n){
+    int i = 0 , j = n-1;
+    while (i < j)
+    {
+        swap(arr[i] , arr[j]);
+        i++;
+        j--;
+    }
+}
+
+void rotateArr(int arr[] , int n , int k){
+    helper(arr , n);
+    helper(arr+n-k , k);
+    helper(arr , n-k);
+}
+
 int main(){
     int arr[] = {1,2,3,4,5};
     rotate(arr , 5);

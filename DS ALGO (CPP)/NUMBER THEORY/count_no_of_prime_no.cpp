@@ -1,4 +1,4 @@
-//sieve of eratosthenes algorithm
+//sieve of eratosthenes algorithm -- time complexity -- O(N log(log N))
 #include<bits/stdc++.h>
 using namespace std;
 

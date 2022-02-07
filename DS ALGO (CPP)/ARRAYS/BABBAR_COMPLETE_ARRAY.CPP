@@ -371,6 +371,40 @@ long long trappingWater(int arr[], int n){
     return water;
 }
 
+int trappingopti(int arr[] , int n){
+    int lo = 0 , hi = n-1;
+    int mi = 0 , ma = 0;
+    int ans = 0;
+    while (lo <= hi)
+    {
+        if (arr[lo] < arr[hi])
+        {
+            if (arr[lo] > mi)
+            {
+                mi = arr[lo];
+            }
+            else
+            {
+                ans = ans + (mi - arr[lo]);
+            }
+            lo++;
+        }
+        else
+        {
+            if (arr[hi] > ma)
+            {
+                ma = arr[hi];
+            }
+            else
+            {
+                ans = ans + (ma - arr[hi]);
+            }
+            hi--;
+        }
+    }
+    return ans;
+}
+
 int main(){
     // int n;
     // cin>>n;

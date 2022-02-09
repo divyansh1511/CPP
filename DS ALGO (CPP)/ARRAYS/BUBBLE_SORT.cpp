@@ -5,9 +5,9 @@ void bubblesort(int arr[] , int n){
     int temp = 0;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)         // here you can use j = 1
+        for (int j = 0; j < n-i-1; j++)         
         {
-            if (arr[j] > arr[j+1])          // change arr[j-1] and arr[j];
+            if (arr[j] > arr[j+1])          
             {
                 temp = arr[j];
                 arr[j] = arr[j+1];

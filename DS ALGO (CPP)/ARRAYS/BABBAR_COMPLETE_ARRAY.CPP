@@ -288,11 +288,12 @@ vector<int> commoneleinThree(int arr1[] , int arr2[] , int arr3[] , int n1 , int
     }
     for (int i = 0; i < n3; i++)
     {
-        if (s3.find(arr3[i]) == s3.end())
-        {
-            v.push_back(arr3[i]);
+        if(s1.find(arr3[i])!=s1.end() && s2.find(arr3[i])!=s2.end()){
+            if(s3.find(arr3[i])==s3.end()){
+                v.push_back(arr3[i]);
+            }
+            s3.insert(arr3[i]);
         }
-        s3.insert(arr3[i]);
     }
     return v;
 }

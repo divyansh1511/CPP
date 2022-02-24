@@ -588,26 +588,24 @@ int search(int in[], int instart, int inend, int data)
     return i;
 }
 
-treenode *buildtree(int pre[], int in[], int instart, int inend)
-{
-    static int preindex = 0;
-    if (instart > inend)
-    {
+treenode* build(vector<int>&pre , vector<int> &ino , int instart , int inend , int &preindex){
+    if(instart > inend){
         return NULL;
     }
-
-    treenode *root = new treenode(pre[preindex++]);
-
-    if (instart == inend)
-    {
-        return root;
+    int index = instart;
+    while(ino[index] != pre[preindex]){
+        index++;
     }
-
-    int index = (instart + inend)/2;        //----------or search function
-    root->left = buildtree(pre, in, instart, index - 1);
-    root->right = buildtree(pre, in, index + 1, inend);
-
+    treenode* root = new treenode(ino[index]);
+    preindex++;
+    root->left = build(pre , ino , instart , index-1 , preindex);
+    root->right = build(pre , ino , index+1 , inend , preindex);
     return root;
+}
+
+treenode* buildTree(vector<int> &A, vector<int> &B) {
+    int t = 0;
+    return build(A , B , 0 , B.size()-1 , t);
 }
 
 int largestsubtreesum(treenode *root)

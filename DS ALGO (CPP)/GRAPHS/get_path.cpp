@@ -1,5 +1,4 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 vector<int>* getpathDFShelper(int** edges , int n , int v1 ,int v2 , bool* visited){
@@ -60,9 +59,9 @@ int main(){
     }
     vector<int>* output = getpathDFS(edges , n ,1,4);
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < output->size(); i++)
     {
-        cout<<output->at(i)<<endl;
+        cout<<output->at(i)<<" ";
     }
     
 }

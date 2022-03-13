@@ -355,6 +355,40 @@ bool isBiaprate(int** edges , int n){
     return true;
 }
 
+//-------------------------no of islands-----------------------------------//
+
+void removeislands(vector<vector<int>> grid , int i , int j){
+    int n = grid.size();
+    int m = grid[0].size();
+    if (i < 0 || i == n || j < 0 || j == m || grid[i][j] == 0)
+    {
+        return;
+    }
+    grid[i][j] == 0;
+    removeislands(grid , i-1 , j);
+    removeislands(grid , i+1 , j);
+    removeislands(grid , i , j-1);
+    removeislands(grid , i , j+1);
+}
+
+int noofislands(vector<vector<int>> &grid){
+    int n = grid.size();
+    int m = grid[0].size();
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                count++;
+                removeislands(grid , i , j);
+            }
+        }
+    }
+    return count;
+}
+
 int main(){
     int n,e;
     cin>>n>>e;

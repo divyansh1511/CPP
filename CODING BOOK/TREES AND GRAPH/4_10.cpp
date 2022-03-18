@@ -82,4 +82,4 @@ int main(){
     treenode* root = takeinput();
     treenode* subtree = takeinput();
     cout<<checksubtree(root , subtree)<<endl; 
-}
+} 

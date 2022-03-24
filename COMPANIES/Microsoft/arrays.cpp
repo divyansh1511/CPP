@@ -187,6 +187,29 @@ vector<vector<int>> antidiagonals(vector<vector<int>> v){
     return ans;
 }
 
+//----------------------------MATHS----------------------------------
+
+int path(int a , int b){
+    vector<vector<int>> v(a , vector<int>(b,1));
+    for (int i = 1; i < a; i++)
+    {
+        for (int j = 1; j < b; j++)
+        {
+            v[i][j] = v[i-1][j] + v[i][j-1];
+        }
+    }
+    return v[a-1][b-1];
+}
+
+int trailingzeros(int n){
+    int res = 0;
+    for (long long i = 5; (n/i) > 0; i *= 5)
+    {
+        res += (n/i);
+    }
+    return res;
+}
+
 int main(){
 
 }

@@ -134,6 +134,62 @@ int minidel(string a , int n){
     return n - LPS(a , n);
 }
 
+//------------------------PRINT SHORTEST COMMON SUPERSEQUENCE-----------------------------------//
+
+string SCS(string a , string b , int n1 , int n2){
+    int dp[n1+1][n2+2];
+    memset(dp , -1 , sizeof(dp));
+    for (int i = 0; i <= n1; i++)
+    {
+        for (int j = 0; j <= n2; j++)
+        {
+            if (i == 0 || j == 0)
+            {
+                dp[i][j] = 0;
+            }
+        }
+    }
+    for (int i = 1; i <= n1; i++)
+    {
+        for (int j = 1; j <= n2; j++)
+        {
+            if (a[i-1] == b[j-1])
+            {
+                dp[i][j] = 1+dp[i-1][j-1];
+            }
+            else
+            {
+                dp[i][j] = max(dp[i-1][j] , dp[i][j-1]);
+            }
+        }
+    }
+    int i = n1 , j = n2;
+    string ans = "";
+    while (i > 0 && j > 0)
+    {
+        if (a[i-1] == b[j-1])
+        {
+            ans += a[i-1];
+            i--;
+            j--;
+        }
+        else
+        {
+            if (dp[i-1][j] < dp[i][j-1])
+            {
+                ans += b[j-1];
+                j--;
+            }
+            else
+            {
+                ans += a[i-1];
+                i--;
+            }
+        }
+    }
+    return ans;
+}
+
 //---------------------- LONGEST REPEATING SUBSEQUENCE --------------------------------------//
 
 int longestrepating(string a , int n){

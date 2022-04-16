@@ -228,6 +228,54 @@ bool iscycle(int** edges , int n){
     return false;
 }
 
+//-----------------------------USING BFS---
+
+bool iscycleBFShelper(int** edges , int n , int sv , bool* &visited){
+    queue<pair<int , int>> q;
+    visited[sv] = true;
+    q.push({sv , -1});
+    while (!q.empty())
+    {
+        int node = q.front().first;
+        int par = q.front().second;
+        q.pop();
+        for (int i = 0; i < n; i++)
+        {
+            if (edges[i][sv] == 1)
+            {
+                if (!visited[i])
+                {
+                    visited[i] = true;
+                    q.push({i , node});
+                }
+                else if (par != i)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool iscycleBFS(int** edges , int n){
+    bool* visited = new bool[n];
+    for (int i = 0; i < n; i++)
+    {
+        visited[i] = false;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i])
+        {
+            if(iscycleBFShelper(edges , n , i , visited)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 //---------------------------------is CYCLE indirected graph-----------------------------//
 
 bool iscycle1helper(int sv , int** edges , bool* visited , bool* stack , int n){

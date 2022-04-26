@@ -16,7 +16,7 @@ class treenode{
         delete right;
     }
 };
-
+ 
 void kthdistance(treenode* root , int k , vector<int> &res){
     if (!root || k < 0)
     {

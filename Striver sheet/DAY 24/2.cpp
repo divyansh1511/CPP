@@ -1,12 +1,11 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 
-void getminvertex(int* distance , bool* visited , int n){
+int getminvertex(int* distances , bool* visited , int n){
     int minvertex = -1;
     for (int i = 0; i < n; i++)
     {
-        if (!visited[i] && (minvertex == -1 && distance[i] < distance[minvertex]))
+        if (!visited[i] && (minvertex == -1 || distances[minvertex] > distances[i]))
         {
             minvertex = i;
         }
@@ -15,35 +14,55 @@ void getminvertex(int* distance , bool* visited , int n){
 }
 
 void dijkstra(int** edges , int n){
-    int* distance = new int[n];
-    bool* visited = new int[n];
+    int* distances = new int[n];
+    bool* visited = new bool[n];
 
     for (int i = 0; i < n; i++)
     {
-        distance[i] = INT_MAX;
+        distances[i] = INT_MAX;
         visited[i] = false;
     }
-    distance[0] = 0;
-
+    distances[0] = 0;
     for (int i = 0; i < n; i++)
     {
-        int minvertex = getminvertex(distance , visited , n);
+        int minvertex = getminvertex(distances , visited , n);
         visited[minvertex] = true;
         for (int j = 0; j < n; j++)
         {
-            if (edges[minvertex][j] != 0 && !visited[j])
+            if (edges[j][minvertex] != 0 && !visited[j])
             {
-                int dis = distance[minvertex] + edges[minvertex][j];
-                if (dis < distance[j])
+                int dis = distances[minvertex] + edges[minvertex][j];
+                if (dis < distances[j])
                 {
-                    distance[j] = dis;
+                    distances[j] = dis;
                 }
             }
         }
     }
-    
+    for (int i = 0; i < n; i++)
+    {
+        cout<<distances[i]<<" ";
+    }
 }
 
 int main(){
-
+    int n,e;
+    cin>>n>>e;
+    int** edges = new int*[n];
+    for (int i = 0; i < n; i++)
+    {
+        edges[i] = new int[n];
+        for (int j = 0; j < n; j++)
+        {
+            edges[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < e; i++)
+    {
+        int first , second , weight;
+        cin>>first>>second>>weight;
+        edges[first][second] = weight;
+        edges[second][first] = weight;
+    }
+    dijkstra(edges , n);
 }

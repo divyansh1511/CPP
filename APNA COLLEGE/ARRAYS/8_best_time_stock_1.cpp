@@ -9,7 +9,7 @@ int besttime(int arr[] , int n){
         minnum = min(minnum , arr[i]);
         maxnum = max(maxnum , arr[i] - minnum);
     }
-    return minnum;
+    return maxnum;
 }
 
 int main(){

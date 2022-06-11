@@ -133,7 +133,7 @@ bool subsetdp(int wt[] , int sum , int n){
     {
         dp[i][0] = true;
     }
-    for (int i = 0; i <= sum; i++)
+    for (int i = 1; i <= sum; i++)
     {
         dp[0][i] = false;
     }

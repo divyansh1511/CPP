@@ -608,6 +608,7 @@ treenode* buildTree(vector<int> &A, vector<int> &B) {
     return build(A , B , 0 , B.size()-1 , t);
 }
 
+int ma = 0;
 int largestsubtreesum(treenode *root)
 {
     if (root == NULL)
@@ -616,6 +617,7 @@ int largestsubtreesum(treenode *root)
     }
     int lefttree = largestsubtreesum(root->left);
     int righttree = largestsubtreesum(root->right);
+    ma = max(ma , lefttree + righttree + root->data);
     return root->data + lefttree + righttree;
 }
 

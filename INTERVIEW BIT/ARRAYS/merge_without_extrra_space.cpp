@@ -18,7 +18,7 @@ void merge(int arr1[] , int arr2[] , int n , int m){
         }
     }
     sort(arr1 , arr1+n);
-    sort(arr2 , arr2+n);
+    sort(arr2 , arr2+m);
 }
 
 int main(){

@@ -10,7 +10,7 @@ vector<int> addone(vector<int> arr){
     {
         int sum = arr[i] + carry;
         v.push_back(sum%10);
-        sum = sum/10;
+        carry = sum/10;
     }
     while (carry != 0)
     {

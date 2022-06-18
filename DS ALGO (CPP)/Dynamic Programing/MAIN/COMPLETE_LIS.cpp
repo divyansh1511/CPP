@@ -32,7 +32,7 @@ int list2(int arr[] , int n){
 
     for (int i = 1; i < n; i++)
     {
-        lis[i] = 1;
+        // lis[i] = 1;
         for (int j = 0; j < i; j++)
         {
             if (arr[i] > arr[j] && lis[i] < lis[j]+arr[i])

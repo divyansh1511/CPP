@@ -576,7 +576,7 @@ int maxPathSum(treenode* root){
 void DFS(treenode* A ,vector<int> val,vector<vector<int>> &final){
     if(!A){
         return ;
-    }
+    } 
     val.push_back(A->data);
     if(!A->left && !A->right){
         final.push_back(val);

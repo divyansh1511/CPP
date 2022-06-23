@@ -573,6 +573,109 @@ int maxPathSum(treenode* root){
     return sum;
 }
 
+void DFS(treenode* A ,vector<int> val,vector<vector<int>> &final){
+    if(!A){
+        return ;
+    }
+    val.push_back(A->data);
+    if(!A->left && !A->right){
+        final.push_back(val);
+    }
+    DFS(A->left,val,final);
+    DFS(A->right,val,final);
+}
+
+vector<vector<int> > pathSum(treenode* A, int B) {
+    vector<vector<int>> final;
+    if(!A){
+        return final;
+    }
+    vector<int> val;
+    DFS(A,val,final);
+    vector<vector<int>> ans;
+    for(auto x:final){
+        int sum = 0;
+        for(auto y:x){
+            sum+=y;
+        }
+        if(sum==B){
+            ans.push_back(x);
+        }
+    }
+    return ans;
+}
+
+treenode* merge2bt(treenode* root1 , treenode* root2){
+    if(root1 && root2){
+        treenode* root = new treenode(root1->data + root2->data);
+        root->left = merge2bt(root1->left , root2->left);
+        root->right = merge2bt(root1->right , root2->right);
+        return root;
+    }
+    else
+    {
+        return root1 ? root1 : root2;
+    }
+}
+
+vector<int> cousinsBT(treenode* root , int b){
+    vector<int> ans;
+    queue<treenode*> pendingnodes;
+    pendingnodes.push(root);
+
+    treenode* tt = NULL;
+    int flag = 0;
+
+    while (!pendingnodes.empty())
+    {
+        int n = pendingnodes.size();
+        for (int i = 1; i <= n; i++)
+        {
+            treenode* curr = pendingnodes.front();
+            pendingnodes.pop();
+            if (curr->left != NULL)
+            {
+                pendingnodes.push(curr->left);
+                if (curr->left->data == b)
+                {
+                    tt = curr;
+                    flag = 1;
+                }
+            }
+            if (curr->right != NULL)
+            {
+                pendingnodes.push(curr->right);
+                if (curr->right->data == b)
+                {
+                    tt = curr;
+                    flag = 1;
+                }
+            }
+        }
+        if (flag)
+        {
+            break;
+        }
+    }
+    if (flag == 0)
+    {
+        return ans;
+    }
+    while (!pendingnodes.empty())
+    {
+        treenode* curr = pendingnodes.front();
+        if ((tt->right != NULL && tt->right->data == curr->data) || (tt->left != NULL && tt->left->data == curr->data))
+        {
+            pendingnodes.pop();
+            curr = pendingnodes.front();
+            continue;
+        }
+        ans.push_back(curr->data);
+        pendingnodes.pop();
+    }
+    return ans;
+}
+
 int main(){
 
 }

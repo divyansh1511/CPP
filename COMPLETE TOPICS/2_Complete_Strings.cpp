@@ -442,6 +442,27 @@ int myAtoi(string s){
     return res*indi;
 }
 
+//-------Exaclty One Swap --- gfg 
+
+long long countStrings(string S)
+{
+    map<char,long long>mp;
+    long long ans=1,n=S.length();
+    bool check=false;
+    for(long long i=0;i<n;i++){
+        mp[S[i]]++;
+        if(mp[S[i]]>1)
+            check=true;
+    }
+    for(long long i=0;i<n;i++){
+        ans+=n-i-1-(mp[S[i]]-1);
+        mp[S[i]]--;
+    }
+    if(check==false)
+        return ans-1;
+    else return ans;
+}
+
 int main(){
 
 }

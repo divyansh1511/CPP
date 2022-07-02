@@ -888,6 +888,29 @@ string largestNumber(vector<int> &a){
     return ans;
 }
 
+int minnoofswaps(vector<int> v , int n){
+    int ans = 0;
+    vector<int> temp = v;
+    map<int,int> mp;
+    for (int i = 0; i < n; i++)
+    {
+        mp[v[i]] = i;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        if (v[i] != temp[i])
+        {
+            ans++;
+            int init = v[i];
+            int k = mp[temp[i]];
+            swap(v[i] , v[k]);
+            mp[init] = k;
+            mp[temp[i]] = i;
+        }
+    }
+    return ans;
+}
+
 int main(){
     int arr[] = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
     move_negative_to_side(arr , 9);

@@ -1,6 +1,17 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int missingNumber(vector<int> arr , int n){
+    int res = n;
+    int i = 1;
+    for(auto it : arr){
+        res ^= it;
+        res ^= i;
+        i++;
+    }
+    return res;
+}
+
 int noofsetbits(int n){
     int count = 0;
     while (n)

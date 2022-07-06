@@ -911,6 +911,41 @@ int minnoofswaps(vector<int> v , int n){
     return ans;
 }
 
+vector<int> subarrwithgivensum(int arr[] , int n , int s){
+    int j = 0;
+    int k = -1;
+    int sum = 0;
+    while (sum != s)
+    {
+        if (sum < s)
+        {
+            k++;
+            sum += arr[k];
+        }
+        if (sum > s)
+        {
+            sum -= arr[j];
+            j++;
+        }
+        if (sum < s && k < n)
+        {
+            break;
+        }
+    }
+    if (sum == s)
+    {
+        if (k != -1)
+        {
+            return {j+1 , k+1};
+        }
+    }
+    else
+    {
+        return {-1};
+    }
+    
+}
+
 int main(){
     int arr[] = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
     move_negative_to_side(arr , 9);

@@ -463,6 +463,35 @@ long long countStrings(string S)
     else return ans;
 }
 
+int LongestPrefixSuffix(string s){
+    int n = s.size();
+    string s1 = "";
+    string s2 = "";
+    int i = n-1 , j = 1;
+    while (i > 0 && j < n-1)
+    {
+        if (s[0] != s[j])
+        {
+            i--;
+            j++;
+            continue;
+        }
+        s1 = s.substr(0 , i);
+        s2 = s.substr(j , n);
+        if (s1 == s2)
+        {
+            return s1.size();
+        }
+        j++;
+        i--;
+    }
+    if (s[0] == s[n-1])
+    {
+        return 1;
+    }
+    return 0;
+}
+
 int main(){
 
 }

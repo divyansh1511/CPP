@@ -946,6 +946,42 @@ vector<int> subarrwithgivensum(int arr[] , int n , int s){
     
 }
 
+vector<int> maxsubarr(int arr[] , int n){
+    long long int s = 0 , sum = 0 , start = 0 , end = 0 , maxi = 0;
+    vector<int> v;
+    for (int i = 0; i < n; i++)
+    {
+        sum += arr[i];
+        if (sum > maxi)
+        {
+            maxi = sum;
+            start = s;
+            end = i;
+        }
+        if (arr[i] == 0 && sum == maxi)
+        {
+            end++;
+        }
+        if (arr[i] < 0)
+        {
+            sum = 0;
+            s = i+1;
+        }
+    }
+    if (maxi > 0)
+    {
+        for (int i = start; i <= end; i++)
+        {
+            v.push_back(arr[i]);
+        }
+    }
+    else
+    {
+        v.push_back(-1);
+    }
+    return v;
+}
+
 int main(){
     int arr[] = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
     move_negative_to_side(arr , 9);

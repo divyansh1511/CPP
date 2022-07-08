@@ -982,6 +982,28 @@ vector<int> maxsubarr(int arr[] , int n){
     return v;
 }
 
+int countNumberofPossibleTriangle(int arr[] , int n){
+    sort(arr , arr+n);
+    int c = 0;
+    for (int i = n-1; i >= 2; i--)
+    {
+        int t = arr[i];
+        int l = 0 , r = i-1;
+        while (l < r)
+        {
+            if(arr[l] + arr[r] > t){
+                c += (r-l);
+                r--;
+            }
+            else
+            {
+                l++;
+            }
+        }
+    }
+    return c;
+}
+
 int main(){
     int arr[] = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
     move_negative_to_side(arr , 9);

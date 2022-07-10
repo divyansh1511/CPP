@@ -47,7 +47,7 @@ Info helper(treenode* root , int &ans){
     }
     if (currnode.isBST)
     {
-        ans = max(ans , currnode.isBST);
+        ans = max(ans , currnode.size);
     }
     return currnode;
 }

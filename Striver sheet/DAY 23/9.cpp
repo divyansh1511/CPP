@@ -2,36 +2,48 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void removeisland(vector<vector<char>> &grid , int i , int j){
-    int m = grid.size();
-    int n = grid[0].size();
-    if (i < m || i == m || j < n || j == m)
+void findtopsort(vector<int> adj[] , int sv , vector<int> &visited , stack<int> &st){
+    visited[sv] = true;
+    
+    for (auto it : adj[sv])
     {
-        return;
-    }
-    grid[i][j] == '0';
-    removeisland(grid , i+1 , j);
-    removeisland(grid , i-1 , j);
-    removeisland(grid , i , j+1);
-    removeisland(grid , i , j-1);
-}
-
-int noofislands(vector<vector<char>> &grid){
-    int islands = 0;
-    for (int i = 0; i < grid.size(); i++)
-    {
-        for (int j = 0; j < grid[i].size(); j++)
+        if (!visited[it])
         {
-            if (grid[i][j] == '1')
-            {
-                islands++;
-                removeisland(grid , i , j);
-            }
+            findtopsort(adj , it , visited , st);
         }
     }
-    return islands;
+    st.push(sv);
 }
 
-int main(){
+vector<int> toposort(vector<int> adj[] , int n){
+    stack<int> st;
+    vector<int> visited(n , 0);
+    for (int i = 0; i < n; i++)
+    {
+        if (visited[i] == 0)
+        {
+            findtopsort(adj , i , visited , st);
+        }
+    }
+    vector<int> topo;
+    while (!st.empty())
+    {
+        topo.push_back(st.top());
+        st.pop();
+    }
+    return topo;
+}
+
+int main(){ 
+    int n,e;
+    cin>>n>>e;
+    
+    vector<int> adj[n];
+    for (int i = 0; i < e; i++)
+    {
+        int u,v;
+        cin>>u>>v;
+        adj[u].push_back(v);
+    }
     
 }

@@ -1,58 +1,37 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 
-bool ishelper(int sv , vector<int> adj[] , int* color){
-    queue<int> q;
-    q.push(sv);
-    color[sv] = 1;
-    while (!q.empty())
+void removeisland(vector<vector<char>> &grid , int i , int j){
+    int m = grid.size();
+    int n = grid[0].size();
+    if (i < m || i == m || j < n || j == m)
     {
-        int node = q.front();
-        q.pop();
-        for(auto it : adj[node]){
-            if (color[it] == -1)
-            {
-                color[it] = 1 - color[node];
-                q.push(it);
-            }
-            else if (color[it] == color[node])
-            {
-                return false;
-            }
-        }
+        return;
     }
-    return true;
+    grid[i][j] == '0';
+    removeisland(grid , i+1 , j);
+    removeisland(grid , i-1 , j);
+    removeisland(grid , i , j+1);
+    removeisland(grid , i , j-1);
 }
 
-bool checkbiparatite(vector<int> adj[] , int n){
-    int* color = new int[n];
-    for (int i = 0; i < n; i++)
+int noofislands(vector<vector<char>> &grid){
+    int islands = 0;
+    for (int i = 0; i < grid.size(); i++)
     {
-        color[i] = -1;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if (color[i] == -1)
+        for (int j = 0; j < grid[i].size(); j++)
         {
-            if (!ishelper(i , adj , color))
+            if (grid[i][j] == '1')
             {
-                return true;
+                islands++;
+                removeisland(grid , i , j);
             }
         }
     }
-    return false;
+    return islands;
 }
 
 int main(){
-    int n,e;
-    cin>>n>>e;
-    vector<int> adj[n];
-    for (int i = 0; i < n; i++)
-    {
-        int first , second;
-        cin>>first>>second;
-        adj[first].push_back(second);
-        adj[second].push_back(first);
-    }
     
 }

@@ -1,49 +1,48 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 
-void findtopsort(vector<int> adj[] , int sv , vector<int> &visited , stack<int> &st){
-    visited[sv] = true;
-    
-    for (auto it : adj[sv])
-    {
-        if (!visited[it])
-        {
-            findtopsort(adj , it , visited , st);
+vector<int> toposort(unordered_map<int , list<int>> v , int n){
+    int* indegree = new int[n];
+    for(auto it : v){
+        for(auto x : it.second){
+            indegree[x]++;
         }
     }
-    st.push(sv);
-}
-
-vector<int> toposort(vector<int> adj[] , int n){
-    stack<int> st;
-    vector<int> visited(n , 0);
+    queue<int> q;
     for (int i = 0; i < n; i++)
     {
-        if (visited[i] == 0)
+        if (indegree[i] == 0)
         {
-            findtopsort(adj , i , visited , st);
+            q.push(i);
         }
     }
-    vector<int> topo;
-    while (!st.empty())
+    vector<int> ans;
+    while (!q.empty())
     {
-        topo.push_back(st.top());
-        st.pop();
+        int a = q.front();
+        q.pop();
+        ans.push_back(a);
+        for(auto it : v[a]){
+            indegree[it]--;
+            if (indegree[it] == 0)
+            {
+                q.push(it);
+            }
+        }
     }
-    return topo;
+    return ans;
 }
 
-int main(){ 
+int main(){
     int n,e;
     cin>>n>>e;
-    
-    vector<int> adj[n];
+    // vector<vector<int>> v;
+    unordered_map<int , list<int>> v;
     for (int i = 0; i < e; i++)
     {
-        int u,v;
-        cin>>u>>v;
-        adj[u].push_back(v);
+        int first , second;
+        cin>>first>>second;
+        v[first].push_back(second);
     }
     
 }

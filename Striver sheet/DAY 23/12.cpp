@@ -2,29 +2,28 @@
 using namespace std;
 
 bool ishelper(int sv , vector<int> adj[] , int* color){
-    queue<int> q;
-    q.push(sv);
-    color[sv] = 1;
-    while (!q.empty())
+    if (color[sv] == -1)
     {
-        int node = q.front();
-        q.pop();
-        for(auto it : adj[node]){
-            if (color[it] == -1)
-            {
-                color[it] = 1 - color[node];
-                q.push(it);
-            }
-            else if (color[it] == color[node])
+        color[sv] = 1;
+    }
+    for(auto it : adj[sv]){
+        if (color[it] == -1)
+        {
+            color[it] = 1-color[sv];
+            if (!ishelper(it , adj , color))
             {
                 return false;
             }
+        }
+        else if (color[it] == color[sv])
+        {
+            return false;
         }
     }
     return true;
 }
 
-bool checkbiparatite(vector<int> adj[] , int n){
+bool checkbiparatiteDFS(vector<int> adj[] , int n){
     int* color = new int[n];
     for (int i = 0; i < n; i++)
     {

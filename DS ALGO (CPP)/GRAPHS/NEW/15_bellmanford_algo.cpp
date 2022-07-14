@@ -7,7 +7,7 @@ int bellmonford(int n , int v , int src , int des , vector<vector<int>> destiny)
 
     for (int i = 1; i <= n; i++)
     {
-        for (int j = 0; i < v; i++)
+        for (int j = 0; j < v; j++)
         {
             int a = destiny[j][0];
             int b = destiny[j][1];

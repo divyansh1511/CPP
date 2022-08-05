@@ -1004,6 +1004,34 @@ int countNumberofPossibleTriangle(int arr[] , int n){
     return c;
 }
 
+int calculateMedianOfMatrix(vector<vector<int> > &matrix) {
+	int n = matrix.size() , m = matrix[0].size();
+	int mini = INT_MAX , maxi = INT_MIN;
+	for(int i=0;i<n;i++){
+		if(matrix[i][0] < mini){
+			mini = matrix[i][0];
+		}
+		if(matrix[i][m-1] > maxi){
+			maxi = matrix[i][m-1];
+		}
+	}
+	int d = (n*m+1)/2;
+	while(mini < maxi){
+		int mid = mini + (maxi-mini)/2;
+		int p = 0;
+		for(int i=0;i<n;i++){
+			p += (upper_bound(matrix[i].begin() , matrix[i].end() , mid) - matrix[i].begin());
+		}
+		if(p < d){
+			mini = mid+1;
+		}
+		else{
+			maxi = mid;
+		}
+	}
+	return mini;
+}
+
 int main(){
     int arr[] = { -1, 2, -3, 4, 5, 6, -7, 8, 9 };
     move_negative_to_side(arr , 9);

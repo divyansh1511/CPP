@@ -221,9 +221,13 @@ int coinchange_noofways(int arr[] , int n , int sum){
     {
         for (int j = 0; j <= sum; j++)
         {
-            if (i == 0 || j == 0)
+            if (i == 0)
             {
                 dp[i][j] = 0;
+            }
+            else if (j == 0)
+            {
+                dp[i][j] = 1;
             }
         }
     }

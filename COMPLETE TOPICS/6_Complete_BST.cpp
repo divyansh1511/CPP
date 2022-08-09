@@ -273,6 +273,28 @@ treenode* flatten(treenode* root){
     return ret;
 }
 
+bool help(treenode* root , int k , unordered_map<int,int> &mp){
+    if(root == NULL){
+        return false;
+    }
+    if(help(root->left , k , mp)){
+        return true;
+    }
+    if(mp[k-root->data] == 1){
+        return true;
+    }
+    mp[root->data] = 1;
+    if(help(root->right , k , mp)){
+        return true;
+    }
+    return false;
+}
+
+bool twosum(treenode* root , int k){
+    unordered_map<int,int> mp;
+    return help(root , k , mp);
+}
+
 int main(){
 
 }

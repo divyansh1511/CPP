@@ -561,8 +561,8 @@ int solve11(treenode* root , int &sum){
     {
         return 0;
     }
-    int leftsum = root->data + solve11(root , sum);
-    int rightsum = root->data + solve11(root , sum);
+    int leftsum = root->data + solve11(root->left , sum);
+    int rightsum = root->data + solve11(root->right , sum);
     sum = max({sum , leftsum , rightsum , leftsum+rightsum-root->data , root->data});
     return max({leftsum , rightsum , root->data});
 }

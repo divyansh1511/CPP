@@ -233,8 +233,9 @@ bool iscycleDFSllhelper(vector<vector<int>> v , int n , int sv , int parent , bo
     for(auto it : v[sv]){
         if (!visited[it])
         {
-            visited[it] = true;
-            iscycleDFSllhelper(v , n , it , sv , visited);
+            if(iscycleDFSllhelper(v , n , it , sv , visited)){
+                return true;
+            }
         }
         else if (parent != it)
         {
@@ -281,6 +282,7 @@ bool iscycledirhelper(vector<vector<int>> v , int n , int sv , bool* &visited , 
             return true;
         }
     }
+    dfsvisited[sv] = false;
     return false;
 }
 

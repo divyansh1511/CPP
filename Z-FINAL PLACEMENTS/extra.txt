@@ -1,2 +1,0 @@
-1. MAX RECTANGLE
-2. Length of longest palindrome linked list

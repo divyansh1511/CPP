@@ -927,7 +927,7 @@ vector<int> subarrwithgivensum(int arr[] , int n , int s){
             sum -= arr[j];
             j++;
         }
-        if (sum < s && k < n)
+        if (sum < s && k == n)
         {
             break;
         }

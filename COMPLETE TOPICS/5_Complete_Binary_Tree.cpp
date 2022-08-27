@@ -207,7 +207,7 @@ void preorder(treenode* root){
 void preorderitr(treenode* root){
     stack<treenode*> st;
     treenode* curr = root;
-    while (!st.empty() && root != NULL)
+    while (!st.empty() || curr != NULL)
     {
         while (curr != NULL)
         {

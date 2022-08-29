@@ -5,11 +5,11 @@
 using namespace std;
 class book{
     public:
-    void getdata();
-    void showdata();
-    void checkdata();
+    void askForData();
+    void checkCompleteData();
+    void checkYourBook();
 };
-void book::getdata(){
+void book::askForData(){
     system("cls");
     fstream file;
     string author, title, publisher,b_id;
@@ -21,29 +21,29 @@ void book::getdata(){
     cin>>author;
     cout<<"Enter the title of the book:"<<endl;
     cin>>title;
-    cout<<"publisher of the book:"<<endl;
+    cout<<"Enter the publisher name of the book:"<<endl;
     cin>>publisher;
-    cout<<"enter the price of the book:"<<endl;
+    cout<<"enter the price(in Rs) of the book:"<<endl;
     cin>>price;
     cout<<"Enter the no of copies of the book:"<<endl;
     cin>>copies;
-    file.open("book.txt", ios::out | ios::app);
+    file.open("book1.txt", ios::out | ios::app);
     file << " " << b_id << " " << author << " " << title << " " << publisher << " " << price << " " << " " << copies << "\n";
     file.close();
 }
-void book::showdata(){
+void book::checkCompleteData(){
     system("cls");
     fstream file;
     string author, title, publisher,b_id;
     float price;
     int copies;
-    cout << "Show All Books"<<endl;
-    file.open("book.txt", ios::in);
+    cout << "List of All Books : "<<endl;
+    file.open("book1.txt", ios::in);
     if (!file)
-        cout << "File Openning Error...";
+        cout << "File Openning Error.Check is Your File created?";
     else
     {
-        cout << "\n\n Book ID    Book    Author    No. of Copies\n\n";
+        cout << "\n\n Book ID   Author  Book Name  Publisher  prices  Copies\n\n";
         file >> b_id >> author>> title >> publisher >> price>> copies;
         while (!file.eof())
         {
@@ -56,24 +56,27 @@ void book::showdata(){
     }
 
 }
-void book::checkdata(){
+void book::checkYourBook(){
     system("cls");
     fstream file;
-    string author, title, publisher,b_id ,b_idd;
+    string author, title, publisher,b_id ,b_idd,a,t;
     float price;
-    int c,copies,count = 0;
-    cout << "\n\n\t\t\t\tCheck Specific Book";
-    file.open("book.txt", ios::in);
+    int req_copies,copies,count = 0;
+    cout << "\n\n\t\t\t\tCheck Your Book Here"<<endl;
+    cout<<endl;
+    file.open("book1.txt", ios::in);
     if (!file)
-        cout << "\n\n File Openning Error...";
+        cout << "\n\n File Openning Error. Check is Your File created?";
     else
     {
-        cout << "\n\n Book ID : ";
-        cin >> b_idd;
+        cout<<" Please enter the author name : ";
+        cin>>a;
+        cout<<"Please enter the title of the book : ";
+        cin>>t;
         file  >> b_id >> author >> title >> publisher >>price >>copies;
         while (!file.eof())
         {
-            if (b_idd == b_id)
+            if (a==author && t==title)
             {
                 system("cls");
                 cout << "Check Specific Book"<<endl;
@@ -84,14 +87,15 @@ void book::checkdata(){
                 cout << "Price : " << price<<endl;
                 cout << "No. of Copies : " << copies<<endl;
                 count++;
+                cout<<endl;
                 cout<<"enter reqd. copies:"<<endl;
-                cin>>c;
-                if(c<=copies){
-                    cout<<"total cost of required copies is "<<c*price<<endl;
-                    copies=copies-c;
+                cin>>req_copies;
+                if(req_copies<=copies){
+                    cout<<"Total cost for the required no of copies is "<<req_copies*price<<endl;
+                    copies=copies-req_copies;
                 } 
                 else{
-                    cout<<"required copies are not in stock"<<endl;
+                    cout<<"Sorry! Required number of copies are not in stock."<<endl;
                 }
                 break;
             }
@@ -100,7 +104,7 @@ void book::checkdata(){
         }
         file.close();
         if (count == 0)
-            cout << "\n\n Book ID Not Found...";
+            cout << "\n\n Sorry!! we didn't found the book in aur server!";
     }
     
 };  
@@ -109,6 +113,10 @@ int main(){
     int choice;
     char x;
     book b;
+    cout<<"Welcome !!"<<endl;
+    cout<<"Enter 1 for adding new book"<<endl;
+    cout<<"Enter 2 for check the complete list of books"<<endl;
+    cout<<"Enter 3 for checking specific book"<<endl;
 p:
     cout << "\n\n Your Choice : ";
     cin >> choice;
@@ -117,21 +125,21 @@ p:
     case 1:
         do
         {
-            b.getdata();
+            b.askForData();
             cout << "\n\n Do You Want to Add another Book (y,n) : ";
             cin >> x;
         } while (x == 'y');
         break;
     case 2:
-        b.showdata();
+        b.checkCompleteData();
         break;
     case 3:
-        b.checkdata();
+        b.checkYourBook();
         break;
     case 6:
         exit(0);
     default:
-        cout << "\n\n Invalid Value...Please Try Again...";
+        cout << "\n\n Invalid Choice!! Please Try Again!!";
     }
     
     goto p;

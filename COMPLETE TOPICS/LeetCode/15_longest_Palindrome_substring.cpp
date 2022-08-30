@@ -8,7 +8,7 @@ string longestPalindrome(string s){
     int mxlen = 0 , start = 0;
     for (int i = 0; i < n; i++)
     {
-        dp[i][i] = 0;
+        dp[i][i] = 1;
         mxlen = 1;
     }
     for (int i = 0; i < n; i++)
@@ -20,7 +20,7 @@ string longestPalindrome(string s){
             start = i;
         }
     }
-    for (int k = 3; k < n; k++)
+    for (int k = 3; k <= n; k++)
     {
         for (int i = 0; i < n-k+1; i++)
         {

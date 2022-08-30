@@ -588,8 +588,8 @@ double merdian2arrays(vector<int> arr1 , vector<int> arr2){
     {
         return merdian2arrays(arr2 , arr1);
     }
-    int lo = 0 , hi = n-1;
-    while (lo < hi)
+    int lo = 0 , hi = n;
+    while (lo <= hi)
     {
         int cut1 = (lo+hi)/2;
         int cut2 = (n+m+1)/2 - cut1;
